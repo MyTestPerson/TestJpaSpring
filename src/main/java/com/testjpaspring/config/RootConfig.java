@@ -22,8 +22,8 @@ import java.util.Properties;
 @Configuration
 @EnableJpaRepositories
 @EnableTransactionManagement
-@ComponentScan({"com.testjpaspring.repository", "com.testjpaspring.service"})
-public class RootConfig implements WebMvcConfigurer {
+@ComponentScan({"com.testjpaspring.service", "com.testjpaspring.repository"})
+public class RootConfig {
 
 
 

@@ -3,6 +3,7 @@ package com.testjpaspring.service;
 import com.testjpaspring.model.User;
 import com.testjpaspring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
