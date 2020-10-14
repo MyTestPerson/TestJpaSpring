@@ -1,9 +1,11 @@
 package com.testjpaspring.config;
 
+import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -17,11 +19,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-@EnableWebMvc
 @Configuration
+@EnableJpaRepositories
 @EnableTransactionManagement
 @ComponentScan({"com.testjpaspring.repository", "com.testjpaspring.service"})
 public class RootConfig implements WebMvcConfigurer {
+
+
+
 
 
     @Bean
@@ -63,11 +68,16 @@ public class RootConfig implements WebMvcConfigurer {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
-    Properties additionalProperties() {
+    private Properties additionalProperties() {
 
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
+
+        properties.put(Environment.SHOW_SQL, "true");
+        properties.put(Environment.FORMAT_SQL, "true");
+        properties.put(Environment.DEFAULT_SCHEMA, "testjpaspring");
+        properties.put(Environment.HBM2DDL_AUTO, "update");
+        properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
+        properties.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
         return properties;
     }
