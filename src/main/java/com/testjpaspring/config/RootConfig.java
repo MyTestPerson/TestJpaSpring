@@ -20,9 +20,9 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories
 @EnableTransactionManagement
-@ComponentScan({"com.testjpaspring.service", "com.testjpaspring.repository"})
+@EnableJpaRepositories("com.testjpaspring.repository")
+@ComponentScan({"com.testjpaspring.service"})
 public class RootConfig {
 
 
